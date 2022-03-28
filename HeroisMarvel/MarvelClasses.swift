@@ -14,7 +14,7 @@ struct MarvelInfo: Codable {
     let data: MarvelData
 }
 
-struct MarvelData {
+struct MarvelData: Codable {
     let offset: Int
     let limit: Int
     let total: Int
