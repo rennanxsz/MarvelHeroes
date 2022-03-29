@@ -59,9 +59,10 @@ class HeroesTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! HeroTableViewCell
 
-        // Configure the cell...
+        let hero = heroes[indexPath.row]
+        cell.prepareCell(with: hero)
 
         return cell
     }
