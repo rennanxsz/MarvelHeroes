@@ -41,6 +41,11 @@ class HeroesTableViewController: UITableViewController {
                 self.heroes += info.data.results
                 self.total = info.data.total
                 print("Total: ", self.total, "- Já incluídos: ", self.heroes.count)
+                DispatchQueue.main.sync {
+                    self.loadingHeroes = false
+                    self.label.text = "Não foram encontrados heróis com o nome \(self.name!)."
+                    self.tableView.reloadData()
+                }
             }
         }
     }
@@ -48,12 +53,13 @@ class HeroesTableViewController: UITableViewController {
     //Verificação do numero de rows
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        tableView.backgroundView = heroes.count == 0 ? label : nil
         return heroes.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 
         // Configure the cell...
 
